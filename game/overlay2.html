@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,900;1,900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --peru-red: #D91A21;
+            --inca-gold: #FFD700;
+            --grit-black: #0A0A0B;
+            --concrete: #C0C0C0;
+            --tectonic-shift: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: var(--grit-black);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* The Distorted Tectonic Overlay */
+        #flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--grit-black);
+            transition: transform 0.8s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.6s ease;
+            cursor: wait;
+        }
+
+        /* Tectonic Grain Filter */
+        .noise-svg {
+            position: absolute;
+            width: 0;
+            height: 0;
+        }
+
+        .grain-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.15;
+            filter: url(#distort-grain);
+            z-index: 10;
+        }
+
+        /* Andean Fiber Background Pattern */
+        .fiber-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(45deg, transparent 48%, var(--peru-red) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, var(--peru-red) 50%, transparent 52%);
+            background-size: 60px 60px;
+            opacity: 0.05;
+            animation: patternShift 20s linear infinite;
+        }
+
+        @keyframes patternShift {
+            from { background-position: 0 0; }
+            to { background-position: 500px 500px; }
+        }
+
+        /* Layout Elements */
+        .tectonic-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1200px;
+            height: 80%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            clip-path: polygon(0% 5%, 100% 0%, 95% 100%, 5% 95%); /* Distorted Tectonic edge */
+        }
+
+        .hero-section {
+            background: linear-gradient(to bottom right, #111, #000);
+            position: relative;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border-right: 1px solid var(--peru-red);
+        }
+
+        .hero-section::before {
+            content: "RITMO URBANO";
+            position: absolute;
+            top: 20px;
+            left: -40px;
+            font-size: 10rem;
+            color: rgba(255, 215, 0, 0.03);
+            font-weight: 900;
+            transform: rotate(-90deg);
+            white-space: nowrap;
+        }
+
+        .visual-section {
+            background: url('https://images.unsplash.com/photo-1518105779142-d975f22f1b0a?auto=format&fit=crop&q=80&w=1000') center/cover;
+            filter: grayscale(1) contrast(1.5) brightness(0.6);
+            mix-blend-mode: multiply;
+            position: relative;
+        }
+
+        .visual-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent, var(--peru-red));
+            opacity: 0.4;
+        }
+
+        /* Typography */
+        .band-name {
+            font-size: clamp(3rem, 10vw, 7rem);
+            color: var(--concrete);
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -4px;
+            position: relative;
+            z-index: 5;
+            text-shadow: 4px 4px 0px var(--peru-red);
+            animation: textGlitch 4s infinite;
+        }
+
+        .sub-data {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--inca-gold);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Loading Fiber */
+        .loader-container {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            width: 300px;
+            text-align: right;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0%;
+            background: var(--peru-red);
+            box-shadow: 0 0 15px var(--peru-red);
+            transition: width 0.3s ease;
+        }
+
+        .status-text {
+            font-family: 'JetBrains Mono', monospace;
+            color: white;
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        /* Keyframes */
+        @keyframes textGlitch {
+            0%, 90%, 100% { transform: skew(0deg); }
+            91% { transform: skew(10deg); filter: blur(1px); }
+            93% { transform: skew(-15deg); color: var(--inca-gold); }
+            95% { transform: skew(0deg); }
+        }
+
+        /* Loaded State */
+        .loaded #flash-overlay {
+            transform: translateY(-100%) skewY(-5deg);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Andean Pattern Border */
+        .andean-accent {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--inca-gold),
+                var(--inca-gold) 20px,
+                var(--peru-red) 20px,
+                var(--peru-red) 40px,
+                var(--grit-black) 40px,
+                var(--grit-black) 60px
+            );
+        }
+
+        .cta-instruction {
+            margin-top: 2rem;
+            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            opacity: 0.4;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+        }
+    </style>
+</head>
+<body>
+
+    <svg class="noise-svg">
+        <filter id="distort-grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+            <feComponentTransfer>
+                <feFuncR type="linear" slope="0.3" />
+                <feFuncG type="linear" slope="0.3" />
+                <feFuncB type="linear" slope="0.3" />
+            </feComponentTransfer>
+        </filter>
+    </svg>
+
+    <div id="flash-overlay">
+        <div class="grain-overlay"></div>
+        <div class="fiber-pattern"></div>
+
+        <div class="tectonic-frame">
+            <div class="hero-section">
+                <div class="sub-data">// BARRIO LIMA SUR // 2024</div>
+                <h1 class="band-name">LLACTA<br>CRU</h1>
+                <div class="sub-data">Distorting the Andean frequency</div>
+            </div>
+            <div class="visual-section"></div>
+            <div class="andean-accent"></div>
+        </div>
+
+        <div class="loader-container">
+            <div class="status-text" id="load-status">WEAVING DATA FIBERS... 0%</div>
+            <div class="progress-track">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="cta-instruction">Connecting to the grid</div>
+    </div>
+
+    <!-- Background Content (Behind Overlay) -->
+    <main style="padding: 100px; color: white; text-align: center;">
+        <h1 style="font-size: 3rem;">SCENE LOADED</h1>
+        <p style="font-family: 'JetBrains Mono'; margin-top: 20px;">The tectonic fiber has shifted. Welcome to the underground.</p>
+        <button onclick="location.reload()" style="margin-top: 40px; padding: 15px 30px; background: var(--peru-red); color: white; border: none; font-family: 'JetBrains Mono'; cursor: pointer; font-weight: bold;">RESET SCENE</button>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('progress-bar');
+            const loadStatus = document.getElementById('load-status');
+            const overlay = document.body;
+            let width = 0;
+
+            // Simulate asset loading
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        // Removal sequence
+                        overlay.classList.add('loaded');
+                    }, 500);
+                } else {
+                    width += Math.random() * 15;
+                    if(width > 100) width = 100;
+                    progressBar.style.width = width + '%';
+                    loadStatus.innerText = `WEAVING DATA FIBERS... ${Math.floor(width)}%`;
+                }
+            }, 200);
+        });
+
+        // Developer Tool: Remove overlay on click if needed
+        function removeOverlay() {
+            document.body.classList.add('loaded');
+        }
+    </script>
+</body>
+</html>
+

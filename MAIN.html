@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAUSSA REAL // PROMO KIT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,900;1,900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-silt-900: #1a1918;
+            --color-silt-800: #2c2a28;
+            --color-silt-400: #a89f91;
+            --color-silt-100: #e3ded1;
+            --color-accent: #8b7d6b;
+            --grain-opacity: 0.15;
+                        --bg: #0a0a0a;
+            --fg: #f0f0f0;
+            --accent: #ffffff;
+            --grey: #444;
+            --serrated-edge: polygon(0% 0%, 5% 2%, 10% 0%, 15% 3%, 20% 0%, 25% 2%, 30% 0%, 35% 3%, 40% 0%, 45% 2%, 50% 0%, 55% 3%, 60% 0%, 65% 2%, 70% 0%, 75% 3%, 80% 0%, 85% 2%, 90% 0%, 95% 3%, 100% 0%, 100% 100%, 95% 97%, 90% 100%, 85% 98%, 80% 100%, 75% 97%, 70% 100%, 65% 98%, 60% 100%, 55% 97%, 50% 100%, 45% 98%, 40% 100%, 35% 97%, 30% 100%, 25% 98%, 20% 100%, 15% 97%, 10% 100%, 5% 98%, 0% 100%);
+        }
+        
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+  body {
+            background-color: var(--bg);
+            color: var(--fg);
+            font-family: 'Inter Tight', sans-serif;
+            overflow-x: hidden;
+            line-height: 1;
+  }
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: var(--grain-opacity);
+            mix-blend-mode: overlay;
+        }
+
+        /* Main Container */
+        .siltstone-container {
+            position: relative;
+            width: 90vw;
+            max-width: 1200px;
+            height: 80vh;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(12, 1fr);
+            padding: 2rem;
+            z-index: 10;
+        }
+
+        /* Background Erosion Layers */
+        .layer-bg {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--color-silt-800) 0%, transparent 100%);
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+            z-index: -1;
+            border-left: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Typography */
+        .hero-title {
+            grid-column: 1 / 8;
+            grid-row: 2 / 5;
+            font-size: clamp(4rem, 10vw, 8rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            letter-spacing: -0.05em;
+            color: var(--color-silt-100);
+            z-index: 20;
+            mix-blend-mode: difference;
+            animation: slideInLeft 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .meta-data {
+            grid-column: 1 / 4;
+            grid-row: 10 / 13;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            border-top: 1px solid var(--color-silt-800);
+            padding-top: 1rem;
+            animation: fadeIn 2s ease forwards;
+        }
+
+        /* Image Modules */
+        .image-wrapper {
+            position: relative;
+            overflow: hidden;
+            background: var(--color-silt-800);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .image-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);
+            pointer-events: none;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1) contrast(1.1) brightness(0.9) sepia(0.2);
+            transition: filter 0.5s ease, transform 0.8s ease;
+        }
+
+        .image-wrapper:hover img {
+            filter: grayscale(0.2) contrast(1) brightness(1) sepia(0.1);
+            transform: scale(1.05);
+        }
+
+        /* Person 1 - Left Offset */
+        .p1 {
+            grid-column: 5 / 9;
+            grid-row: 4 / 11;
+            z-index: 15;
+            box-shadow: 20px 20px 60px rgba(0,0,0,0.5);
+            clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+            animation: slideUp 1.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+            animation-delay: 0.2s;
+        }
+
+        /* Person 2 - Right Higher */
+        .p2 {
+            grid-column: 8 / 12;
+            grid-row: 2 / 8;
+            z-index: 14;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+            animation: slideUp 1.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+            animation-delay: 0.4s;
+        }
+
+        /* Siltstone Accents (Sedimentary lines) */
+        .accent-line {
+            position: absolute;
+            background: var(--color-accent);
+            opacity: 0.3;
+        }
+
+        .line-1 { height: 1px; width: 300px; bottom: 15%; right: -50px; transform: rotate(-5deg); }
+        .line-2 { height: 1px; width: 450px; top: 10%; left: 5%; transform: rotate(2deg); }
+
+        /* Keyframes */
+        @keyframes slideInLeft {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive Mobile */
+        @media (max-width: 768px) {
+            .hero-title { grid-column: 1 / 13; grid-row: 1 / 3; font-size: 3rem; }
+            .p1 { grid-column: 1 / 8; grid-row: 3 / 8; }
+            .p2 { grid-column: 6 / 13; grid-row: 6 / 11; }
+            .meta-data { grid-column: 1 / 13; grid-row: 11 / 13; font-size: 0.6rem; }
+        } 
+        
+
+        /* Texture Overlay */
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.08;
+            filter: contrast(150%) brightness(1000%);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            padding: 40px;
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* Branding Section */
+        .brand-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo-block {
+            background: var(--fg);
+            color: var(--bg);
+            padding: 40px;
+            clip-path: var(--serrated-edge);
+            transform: rotate(-1deg);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .logo-block:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        h1 {
+            font-size: clamp(4rem, 10vw, 8rem);
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 0.85;
+        }
+
+        .manifesto {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            max-width: 400px;
+            text-transform: uppercase;
+            margin-top: 40px;
+            color: var(--grey);
+        }
+
+        /* Tracklist Section */
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .release-card {
+            background: #151515;
+            border: 1px solid var(--grey);
+            padding: 30px;
+            position: relative;
+            box-shadow: 10px 10px 0px rgba(255,255,255,0.05);
+        }
+
+        .label-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            border: 1px solid var(--fg);
+            display: inline-block;
+            padding: 4px 8px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 32px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            border-bottom: 8px solid var(--fg);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .track-list {
+            list-style: none;
+        }
+
+        .track-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--grey);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .track-item:hover {
+            background: var(--fg);
+            color: var(--bg);
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .track-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            margin-right: 20px;
+        }
+
+        .track-title {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .track-meta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            opacity: 0.6;
+        }
+
+        .track-item:hover .track-meta {
+            opacity: 1;
+        }
+
+        .track-item.playing {
+            background: var(--fg);
+            color: var(--bg);
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .track-item.playing .track-meta {
+            opacity: 1;
+        }
+
+        /* Brutalist Relief Button */
+        .cta-container {
+            margin-top: auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            background: var(--bg);
+            color: var(--fg);
+            border: 2px solid var(--fg);
+            padding: 20px 40px;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            position: relative;
+            transition: 0.2s;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--fg);
+            z-index: -1;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translate(5px, 5px);
+        }
+
+        .btn:hover::after {
+            transform: translate(-10px, -10px);
+        }
+
+        /* Relief shadows for depth */
+        .relief-text {
+            text-shadow: 2px 2px 0px var(--grey);
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate {
+            animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+
+        footer {
+            grid-column: 1 / -1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 60px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--grey);
+        }
+
+        .location-marker {
+            color: var(--fg);
+            font-weight: 700;
+        }
+
+    </style>
+</head>
+<body>
+
+    <svg class="grain">
+        <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise)" />
+    </svg>
+
+    <div class="container">
+        <section class="brand-section">
+            <div class="animate">
+                <div class="logo-block">
+                    <h1>CAUSSA<br>REAL</h1>
+                </div>
+                <p class="manifesto">
+                    Raw street-level testimony from Lima, Peru. 
+                    Translating the frustration of a generation 
+                    caught between erasure and survival.
+                </p>
+            </div>
+
+            <div class="animate delay-1" style="margin-top: 100px;">
+                <div style="font-family: 'JetBrains Mono'; font-size: 80px; font-weight: 900; line-height: 0.7; letter-spacing: -10px; opacity: 0.2;">
+                    REAL<br>CAUSE
+                </div>
+            </div>
+      
+
+        <div class="content-section animate delay-1">
+            <div class="release-card">
+                <span class="label-tag">INOCULATE MEDIA / REL-092</span>
+                <h2 class="relief-text">LOS GORDOS DE LA LEY</h2>
+                
+                <div class="track-list">
+                    <a href="#" class="track-item" data-track="game/Track1.mp3">
+                        <span class="track-num">01</span>
+                        <span class="track-title">Los Gordos de la Ley</span>
+                        <span class="track-meta">03:42</span>
+                    </a>
+                    <a href="#" class="track-item" data-track="game/track2.mp3">
+                        <span class="track-num">02</span>
+                        <span class="track-title">The Law's A Joke</span>
+                        <span class="track-meta">03:42 [EN]</span>
+                    </a>
+              
+                </div>
+                
+                <!-- Hidden Audio Player -->
+                <audio id="audio-player"></audio>
+            </div>
+
+            <div class="cta-container animate delay-2">
+                <div class="btn">MERCH</div>
+                <a href="./game/index.html" class="btn" style="background: var(--fg); color: var(--bg); text-decoration: none; display: flex; align-items: center; justify-content: center;">MINI GAME</a>
+            </div>
+        </div>
+        <div class="accent-box animate delay-2">
+             <!-- SVG Grain Filter -->
+    <svg class="grain-overlay">
+        <filter id="grain">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#grain)" />
+    </svg>
+
+    <div class="siltstone-container">
+        <div class="layer-bg"></div>
+        <div class="accent-line line-1"></div>
+        <div class="accent-line line-2"></div>
+
+        <h1 class="hero-title">TENER <br>CALLE</h1>
+
+        <!-- Duet Photos -->
+        <div class="image-wrapper p1">
+            <img src="https://images.unsplash.com/photo-1542596594-649edbc13630?auto=format&fit=crop&q=80&w=800" alt="Serious male, late 20s, striking South American features, weathered texture">
+        </div>
+
+        <div class="image-wrapper p2">
+            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=800" alt="Serious male with concerned look, late 20s, sharp features, siltstone aesthetic">
+        </div>
+
+        <!-- Technical Meta -->
+        <div class="meta-data">
+            <p>Archive No: 88-DUO</p>
+            <p>Origin: LIMA PERU / SEATTLE WA</p>
+            <p>Subject: Duet  / 28-29</p>
+            <p style="margin-top: 1rem; color: var(--color-silt-100);">[ 01:21:44:03 ]</p>
+        </div>
+    </div>
+
+    <script>
+        // Subtle Mouse parallax for that "floating stone" feel
+        document.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            
+            document.querySelector('.p1').style.transform = `translate(${moveX * 1.5}px, ${moveY * 1.5}px)`;
+            document.querySelector('.p2').style.transform = `translate(${moveX * -0.8}px, ${moveY * -0.8}px)`;
+            document.querySelector('.hero-title').style.transform = `translate(${moveX * 0.5}px, 0)`;
+        });
+    </script>
+        </div>
+
+        <footer class="animate delay-2">
+            <div>
+                ©2026 INOCULATE MEDIA. ALL RIGHTS RESERVED.<br>
+                UNAUTHORIZED DUPLICATION IS A VIOLATION OF APPLICABLE LAWS.
+            </div>
+            <div style="text-align: right;">
+                ORIGIN: <span class="location-marker">LIMA, PERU</span><br>
+                COORDINATES: 12.0464° S, 77.0428° W
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Subtle Parallax / Mouse interaction for relief effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            document.querySelector('.logo-block').style.transform = `rotate(-1deg) translate(${x}px, ${y}px)`;
+        });
+
+        // Audio Playback for Tracks
+        const audioPlayer = document.getElementById('audio-player');
+        const trackItems = document.querySelectorAll('.track-item');
+        let currentTrack = null;
+
+        trackItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const trackFile = item.dataset.track;
+                
+                // Remove playing class from all tracks
+                trackItems.forEach(t => t.classList.remove('playing'));
+                
+                // If clicking the same track, toggle play/pause
+                if (currentTrack === trackFile && !audioPlayer.paused) {
+                    audioPlayer.pause();
+                    item.classList.remove('playing');
+                } else {
+                    // Play new track or resume
+                    audioPlayer.src = trackFile;
+                    audioPlayer.play();
+                    item.classList.add('playing');
+                    currentTrack = trackFile;
+                }
+            });
+        });
+
+        // Remove playing class when track ends
+        audioPlayer.addEventListener('ended', () => {
+            trackItems.forEach(t => t.classList.remove('playing'));
+        });
+    </script>
+</body>
+</html>
+
+
