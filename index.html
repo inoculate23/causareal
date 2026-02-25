@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Raw street-level testimony from Lima, Peru. CAUSSA REAL: Translating the frustration of a generation caught between erasure and survival.">
     <meta name="keywords" content="CAUSSA REAL, Lima, Peru, Inoculate Media, music, testimony, urban culture">
@@ -28,9 +28,12 @@
     <meta name="robots" content="index, follow">
     <meta name="language" content="English, Spanish">
     <meta name="revisit-after" content="7 days">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>CAUSSA REAL // PROMO KIT</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barrio&family=Playwrite+PE:wght@100..400&display=swap" rel="stylesheet">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,900;1,900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=JetBrains+Mono:wght@300;500&display=swap" rel="stylesheet">
@@ -154,6 +157,11 @@
             background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.4) 100%);
             pointer-events: none;
         }
+.barrio-regular {
+  font-family: "Barrio", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 
         .image-wrapper img {
             width: 100%;
@@ -279,10 +287,10 @@
         .manifesto {
             font-family: 'JetBrains Mono', monospace;
             font-size: 14px;
-            max-width: 400px;
+            max-width:558px;
             text-transform: uppercase;
             margin-top: 40px;
-            color: var(--grey);
+            color: rgb(166, 169, 163)
         }
 
         /* Tracklist Section */
@@ -318,6 +326,7 @@
             border-bottom: 8px solid var(--fg);
             padding-bottom: 10px;
             display: inline-block;
+            color: red
         }
 
         .track-list {
@@ -493,7 +502,7 @@
         <section class="brand-section">
             <div class="animate">
                 <div class="logo-block">
-                    <h1>CAUSA<br>REAL</h1>
+                    <h2 class='barrio-regular'> South American Hip Hop from Lima, Peru<br></h2><h1>CAUSA<br>REAL</h1>
                 </div>
                 <p class="manifesto">
                     Raw street-level testimony from Lima, Peru. 
@@ -519,14 +528,18 @@
                     <a href="#" class="track-item" data-track="game/Track1.mp3">
                         <span class="track-num">01</span>
                         <span class="track-title">Los Gordos de la Ley</span>
-                        <span class="track-meta">03:42</span>
+                        <span class="track-meta">03:42 [ES]</span>
                     </a>
                     <a href="#" class="track-item" data-track="game/track2.mp3">
                         <span class="track-num">02</span>
                         <span class="track-title">The Law's A Joke</span>
                         <span class="track-meta">03:42 [EN]</span>
                     </a>
-              
+                    <a href="#" class="track-item" data-track="game/track4.mp3">
+                        <span class="track-num">03</span>
+                        <span class="track-title">Causa Real</span>
+                        <span class="track-meta">02:25 [ES]</span>
+                    </a>
                 </div>
                 
                 <!-- Hidden Audio Player -->
@@ -587,7 +600,7 @@
         </div>
 
         <footer class="animate delay-2">
-            <div>
+            <div class="manifesto">
                 ©2026 INOCULATE MEDIA. ALL RIGHTS RESERVED.<br>
                 UNAUTHORIZED DUPLICATION IS A VIOLATION OF APPLICABLE LAWS.
             </div>
